@@ -13,48 +13,19 @@ module StackCtl
   # @formatter:off
   {
     VERSION: 'version',
-  }.each do |s, fp|
-    autoload(:Pathname, 'pathname')
-    autoload(s, Pathname.new(__dir__).join("stack_ctl/#{fp}"))
-  end
+    Bundled: 'bundled',
+    Container: 'container',
+    Injectable: 'injectable',
+  }.each { |s, fp| autoload(s, "#{__dir__}/stack_ctl/#{fp}") }
   # @formatter:on
 
-  class << self
-    protected
-
-    # Denote current class is used in a bundled context.
-    #
-    # @return [Boolean]
-    def bundled?
-      # @formatter:off
-      [%w[gems.rb gems.locked], %w[Gemfile Gemfile.lock]].map do |m|
-        Dir.chdir("#{__dir__}/..") do
-          m.map { |f| Pathname(f).file? }.uniq
-        end
-      end.include?([true])
-      # @formatter:on
-    end
-
-    # Denote current class is used in development context.
-    #
-    # @return [Boolean]
-    def development?
-      # @formatter:off
-      [['gemspec.tpl']].map do |m|
-        Dir.chdir("#{__dir__}/..") do
-          m.map { |f| Pathname(f).file? }
-        end
-      end.include?([true])
-      # @formatter:on
-    end
+  include(Bundled).tap do
+    require 'bundler/setup' if bundled?
+    require 'kamaze/project/core_ext/pp' if development?
   end
 
-  if bundled?
-    require 'bundler/setup'
-  end
-
-  if development?
-    require 'pp'
-    require 'kamaze/project/core_ext/pp'
+  require('dry/auto_inject').tap do
+    # noinspection RubyConstantNamingConvention
+    Injector = Dry::AutoInject(StackCtl::Container)
   end
 end
