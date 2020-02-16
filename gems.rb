@@ -8,6 +8,7 @@ group :default do
   gem 'kamaze-version', '~> 1.0'
   gem 'sys-proc', '~> 1.1'
   gem 'thor', '~> 1.0'
+  gem 'dry-auto_inject', '~> 0.7'
 end
 
 group :development do
