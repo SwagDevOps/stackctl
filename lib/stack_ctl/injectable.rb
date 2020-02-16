@@ -11,6 +11,14 @@ require 'dry/container'
 # Sample of use:
 #
 # ```ruby
+# StackCtl::Container.register(:users) do
+#   [
+#     {
+#       name: 'Mike'
+#     }
+#   ]
+# end
+#
 # class UsersRepository
 #   include StackCtl::Injectable
 #
@@ -21,8 +29,16 @@ require 'dry/container'
 #   def find!(id)
 #     users.fetch(id)
 #   end
-# end`
+# end
+#
+# UsersRepository.new.find!(0).tap do |user|
+#   pp(user)
+# end
+# # {:name=>"Mike"}
 # ```
+#
+# @see StackCtl::Container
+# @see https://dry-rb.org/gems/dry-auto_inject/0.6/
 module StackCtl::Injectable
   class << self
     def included(base)
@@ -39,9 +55,7 @@ module StackCtl::Injectable
     # @return [Boolean]
     # @see https://dry-rb.org/gems/dry-auto_inject/
     def inject(*keys, strategy: :kwargs)
-      # rubocop:disable Style/NilComparison, Layout/EmptyLineAfterGuardClause
       # return false if self.injector == nil
-      # rubocop:enable Style/NilComparison, Layout/EmptyLineAfterGuardClause
 
       true.tap do
         keys.each do |key|
@@ -57,7 +71,7 @@ module StackCtl::Injectable
 
     # @return [Dry::AutoInject::Builder|StackCtl::Injector]
     def injector
-      #noinspection RubyYardReturnMatch
+      # noinspection RubyYardReturnMatch
       StackCtl::Injector
     end
   end
