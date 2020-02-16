@@ -8,14 +8,14 @@
 
 require 'dry/container'
 
+# A a simple, thread-safe container.
+#
+# Intended to be one half of a dependency injection system,
+# in combination with ``dry-auto_inject``.
+#
+# @see StackCtl::Injectable
+# @see https://dry-rb.org/gems/dry-container/0.8/
+# @see https://dry-rb.org/gems/dry-auto_inject/0.6/
 class StackCtl::Container
   extend Dry::Container::Mixin
-
-  register :users do
-    [
-        {
-            name: 'Mike'
-        }
-    ]
-  end
 end
