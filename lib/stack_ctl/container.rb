@@ -6,8 +6,8 @@
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-require_relative('../stack_ctl')
-require 'dry/container'
+require_relative '../stack_ctl'
+require 'dry-container'
 
 # A a simple, thread-safe container.
 #
@@ -17,6 +17,18 @@ require 'dry/container'
 # @see StackCtl::Injectable
 # @see https://dry-rb.org/gems/dry-container/0.8/
 # @see https://dry-rb.org/gems/dry-auto_inject/0.6/
-class StackCtl::Container
-  extend Dry::Container::Mixin
+class StackCtl::Container < ::Dry::Container
+  def register(key, contents = nil, options = {}, &block)
+    if self.key?(key)
+      ::Dry::Container.new.tap do |container|
+        container.register(key, contents, options, &block)
+
+        return self.merge(container)
+      end
+    end
+
+    super
+  end
+
+  alias_method '[]=', 'register'
 end
