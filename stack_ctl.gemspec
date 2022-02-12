@@ -15,23 +15,21 @@ Gem::Specification.new do |s|
   s.email       = "dimitri@arrigoni.me"
   s.homepage    = "https://github.com/SwagDevOps/stackctl"
 
-  # MUST follow the higher required_ruby_version
-  # requires version >= 2.3.0 due to safe navigation operator &
-  # requires version >= 2.5.0 due to Lint/Syntax: unexpected token kRESCUE
-  s.required_ruby_version = ">= 2.5.0"
+  s.required_ruby_version = ">= 2.7.0"
   s.require_paths = ["lib"]
   s.bindir        = "bin"
-  s.executables   = Dir.glob([s.bindir, "/*"].join)
-                       .select { |f| File.file?(f) and File.executable?(f) }
-                       .map { |f| File.basename(f) }
-  s.files = [
+  s.executables   = [
+  ]
+  s.files         = [
     ".yardopts",
-    s.require_paths.map { |rp| [rp, "/**/*.rb"].join },
-    s.require_paths.map { |rp| [rp, "/**/*.yml"].join },
-  ].flatten
-   .map { |m| Dir.glob(m) }
-   .flatten
-   .push(*s.executables.map { |f| [s.bindir, f].join("/") })
+    "README.md",
+    "lib/stack_ctl.rb",
+    "lib/stack_ctl/bundleable.rb",
+    "lib/stack_ctl/container.rb",
+    "lib/stack_ctl/injectable.rb",
+    "lib/stack_ctl/version.rb",
+    "lib/stack_ctl/version.yml",
+  ]
 
   s.add_runtime_dependency("baby_erubis", ["~> 2.2"])
   s.add_runtime_dependency("dry-auto_inject", ["~> 0.7"])

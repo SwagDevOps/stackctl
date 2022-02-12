@@ -5,6 +5,11 @@ patch: 0
 authors: ['Dimitri Arrigoni']
 email: 'dimitri@arrigoni.me'
 date: '2020-02-16'
+# MUST follow the higher required_ruby_version
+# requires version >= 2.3.0 due to safe navigation operator &
+# requires version >= 2.5.0 due to Lint/Syntax: unexpected token kRESCUE
+# requires version >= 2.7.0 due to ... operator
+required_ruby_version: '>= 2.7.0'
 summary: 'Simple docker stacks manager'
 description: 'Manage containers stacks based on docker'
 homepage: 'https://github.com/SwagDevOps/stackctl'
