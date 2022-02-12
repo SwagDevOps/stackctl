@@ -22,9 +22,9 @@ module StackCtl
   class << self
     # @api private
     def injector
-      @injector ||= lambda do
-        require('dry/auto_inject').then { Dry::AutoInject(Container) }
-      end.call
+      lambda do
+        require('dry/auto_inject').then { Dry::AutoInject(Container.new) }
+      end.then { |builder| @injector ||= builder.call }
     end
   end
 end
