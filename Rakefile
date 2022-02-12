@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-autoload(:StackCtl, "#{__dir__}/lib/stack_ctl")
-
+require_relative 'lib/stack_ctl'
 require 'kamaze/project'
 require 'sys/proc'
 require 'yaml'
@@ -11,7 +10,7 @@ Sys::Proc.progname = nil
 # @formatter:off
 Kamaze.project do |project|
   project.subject = StackCtl
-  project.name = 'stackctl'
+  project.name = 'stack_ctl'
   # noinspection RubyLiteralArrayInspection
   project.tasks = [
     'cs:correct', 'cs:control',
@@ -33,6 +32,7 @@ if project.path('spec').directory?
   end
 end
 
+# rubocop:disable Style/SoleNestedConditional
 if Gem::Specification.find_all_by_name('simplecov').any?
   if YAML.safe_load(ENV['coverage'].to_s) == true
     autoload(:SimpleCov, 'simplecov')
@@ -43,3 +43,4 @@ if Gem::Specification.find_all_by_name('simplecov').any?
     end
   end
 end
+# rubocop:enable Style/SoleNestedConditional

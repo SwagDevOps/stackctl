@@ -10,22 +10,21 @@ $LOAD_PATH.unshift(__dir__)
 
 # Base module (namespace)
 module StackCtl
-  # @formatter:off
   {
     VERSION: 'version',
-    Bundled: 'bundled',
+    Bundleable: 'bundleable',
     Container: 'container',
     Injectable: 'injectable',
   }.each { |s, fp| autoload(s, "#{__dir__}/stack_ctl/#{fp}") }
-  # @formatter:on
 
-  include(Bundled).tap do
-    require 'bundler/setup' if bundled?
-    require 'kamaze/project/core_ext/pp' if development?
-  end
+  include(Bundleable)
 
-  require('dry/auto_inject').tap do
-    # noinspection RubyConstantNamingConvention
-    Injector = Dry::AutoInject(StackCtl::Container)
+  class << self
+    # @api private
+    def injector
+      @injector ||= lambda do
+        require('dry/auto_inject').then { Dry::AutoInject(Container) }
+      end.call
+    end
   end
 end

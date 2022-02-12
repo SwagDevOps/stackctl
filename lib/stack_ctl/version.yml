@@ -5,12 +5,12 @@ patch: 0
 authors: ['Dimitri Arrigoni']
 email: 'dimitri@arrigoni.me'
 date: '2020-02-16'
-summary: 'Manage stacks (based on docker-compose, nomad, kubernetes, ...)'
-description: 'Manage stacks (based on docker-compose, nomad, kubernetes, ...)'
+summary: 'Simple docker stacks manager'
+description: 'Manage containers stacks based on docker'
 homepage: 'https://github.com/SwagDevOps/stackctl'
 licenses: ['GPL-3.0']
 license_header: |
-  Copyright (C) 2019-2020 Dimitri Arrigoni <dimitri@arrigoni.me>
+  Copyright (C) 2019-2022 Dimitri Arrigoni <dimitri@arrigoni.me>
   License GPLv3+: GNU GPL version 3 or later
   <http://www.gnu.org/licenses/gpl.html>.
   This is free software: you are free to change and redistribute it.
