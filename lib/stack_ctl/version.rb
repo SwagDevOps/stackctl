@@ -6,9 +6,10 @@
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-require_relative('../stack_ctl')
-require 'kamaze/version'
+require_relative '../stack_ctl'
 
 module StackCtl
-  VERSION = Kamaze::Version.new.freeze
+  VERSION = lambda do
+    require('kamaze/version').then { Kamaze::Version.new.freeze }
+  end.call
 end
