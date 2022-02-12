@@ -17,6 +17,7 @@ end
 group :default do
   gem 'baby_erubis', '~> 2.2'
   gem 'dry-auto_inject', '~> 0.7'
+  gem 'dry-container', '~> 0.8'
   gem 'kamaze-version', '~> 1.0'
   gem 'stibium-bundled', '~> 0.0', '>= 0.0.4'
   gem 'sys-proc', '~> 1.1'

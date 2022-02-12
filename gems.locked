@@ -129,6 +129,7 @@ PLATFORMS
 DEPENDENCIES
   baby_erubis (~> 2.2)
   dry-auto_inject (~> 0.7)
+  dry-container (~> 0.8)
   github-markup (~> 3.0)
   interesting_methods (~> 0.1)
   kamaze-project!
