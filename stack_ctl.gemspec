@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("baby_erubis", ["~> 2.2"])
   s.add_runtime_dependency("dry-auto_inject", ["~> 0.7"])
+  s.add_runtime_dependency("dry-container", ["~> 0.8"])
   s.add_runtime_dependency("kamaze-version", ["~> 1.0"])
   s.add_runtime_dependency("stibium-bundled", ["~> 0.0", ">= 0.0.4"])
   s.add_runtime_dependency("sys-proc", ["~> 1.1"])
